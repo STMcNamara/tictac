@@ -31,16 +31,34 @@ class Board:
         return board_layout
 
     def make_move(self, cell: tuple, value: enums.CellValue):
+        """
+        TODO - Error handling on input range and non-empty
+        """
         self.board[cell[0]][cell[1]] = value.value
 
     def clear_board(self):
         self._init_board()
 
-    def is_winner() -> bool: 
+    def is_winner(self) -> bool: 
         """
         Returns True if there is win condition.
         Hard coded for 3x3 boards
         """
+        # Check rows
+        for row in self.board:
+            row_sum = 0
+            for val in row:
+                row_sum += val
+            if row_sum == 3 or row_sum == -3:
+                return True
+
+        # Check columns
+        for c in range(self.board):
+            col_sum = 0
+            for r in range(self.board):
+                row_sum += self.board[r][c]
+            if col_sum == 3 or row_sum == -3:
+                return True
 
         return False
         
