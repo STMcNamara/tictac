@@ -66,6 +66,39 @@ class BoardTests(unittest.TestCase):
         # Asset
         self.assertEqual(res2, expected_cleared_board)
 
+    def test_win_conditions(self):
+        # Set up
+        winning_boards = [[[-1, -1, -1], [0, 0, 0], [0, 0, 0]],
+                          [[0, 0, 0], [1, 1, 1], [0, 0, 0]],
+                          [[0, 0, 1], [0, 0, 1], [0, 0, 1]],
+                          [[-1, 0, 1], [1, -1, -1], [0, 0, -1]],
+                          [[0, 0, 1], [0, 1, 1], [1, 0, 1]]]
+        
+        ongoing_boards = [[[-1, -1, 1], [0, 0, 0], [0, 0, 0]],
+                          [[0, 0, 0], [1, -1, 1], [0, 0, 0]],
+                          [[0, 0, 1], [0, 0, 1], [0, 0, -1]],
+                          [[1, 0, 1], [1, -1, -1], [0, 0, -1]],
+                          [[0, 0, 0], [0, 0, 0], [0, 0, 0]]]
+        
+        # Winning conditions
+        for win in winning_boards:
+            # Set up
+
+            tb = Board()
+            tb.board = win
+            res = tb.is_winner()
+
+            self.assertTrue(res)
+
+        for no_win in ongoing_boards:
+            tb = Board()
+            tb.board = no_win
+            res = tb.is_winner()
+
+            self.assertFalse(res)
+            pass
+
+
 
 
         

@@ -53,12 +53,26 @@ class Board:
                 return True
 
         # Check columns
-        for c in range(self.board):
+        for c in range(len(self.board)):
             col_sum = 0
-            for r in range(self.board):
-                row_sum += self.board[r][c]
+            for r in range(len(self.board)):
+                col_sum += self.board[r][c]
             if col_sum == 3 or row_sum == -3:
                 return True
+
+        # Check diags
+        rl_dia_sum = 0
+        for i in range(len(self.board)):
+            rl_dia_sum += self.board[i][i]
+            if rl_dia_sum in [3, -3]:
+                return True
+
+        lr_dia_sum = 0
+        for i in range(len(self.board)):
+            lr_dia_sum += self.board[i][-i-1]
+            if rl_dia_sum in [3, -3]:
+                return True
+
 
         return False
         
